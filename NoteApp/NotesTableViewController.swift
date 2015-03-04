@@ -49,4 +49,17 @@ class NotesTableViewController: UITableViewController, AddNoteViewControllerDele
             addNoteViewControler.delegate = self
         }
     }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            var mutableNotes:NSMutableArray = NSMutableArray(array: notes)
+            mutableNotes.removeObjectAtIndex(indexPath.row)
+            notes = NSArray(array: mutableNotes)
+            tableView.reloadData()
+        }
+    }
 }
